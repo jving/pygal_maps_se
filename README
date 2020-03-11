@@ -1,0 +1,48 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Example
+data = {
+    'AB': 207,  # Stockholm
+    'AC': 4,    # Västerbotten
+    'BD': 2,    # Norrbotten
+    'C': 8,     # Uppsala
+    'D': 0,     # Södermanland
+    'E': 1,     # Östergötland
+    'F': 12,    # Jönköping
+    'G': 17,     # Kronoberg
+    'H': 2,     # Kalmar
+    'I': 0,     # Gotland
+    'K': 1,     # Blekinge
+    'M': 60,    # Skåne
+    'N': 8,     # Halland
+    'O': 70,    # Västra götaland
+    'S': 25,    # Värmland
+    'T': 5,     # Örebro
+    'U': 0,     # Västmanland
+    'W': 1,     # Dalarna
+    'X': 16,     # Gävleborg
+    'Y': 6,     # Västernorrland
+    'Z': 1,     # Jämtland
+}
+
+
+chart = pygal.maps.se.Lan(height=750,width=350,disable_xml_declaration=True,explicit_size=True,use_cmap=True,show_legend=False)
+chart.use_cmap = True
+chart.cmap = {0: (255,255,255), 1:(0,255,0),10:(0,0,255),50:(150,0,255),300:(255,16,16)}
+chart.title = "Stenar per län"
+chart.add("colormap",data)
+
+
+chart.render_to_file('cmap.svg')
