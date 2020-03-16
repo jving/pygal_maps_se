@@ -1,5 +1,6 @@
 # Pygal_maps_se
 
+This branch adds colormap-capabilities to the map. This should probably be in the superclass but added it to the swedish map for quickness of development.
 
 
 - [Pyga_maps_sel](#pygal_maps_se)
