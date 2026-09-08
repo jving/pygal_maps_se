@@ -32,6 +32,9 @@ As simple as:
 chart = pygal.maps.se.Lan(width=500,height=700)
 chart.add('Good places', ['H','BD'])
 chart.render()
+
+chart = pygal.maps.se.Kommun(width=500, height=700)
+chart.add('Arbete', ["Arvidsjaur"])
 ```
 
 

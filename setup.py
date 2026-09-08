@@ -24,9 +24,9 @@ from setuptools import setup, find_packages
 
 setup(
     name="pygal_maps_se",
-    version='1.0.1',
+    version='1.0.2',
     description="Swedish lan map for pygal",
-    author="Johan Vingbäck",
+    author="Johan Lindéh",
     url="http://pygal.org/",
     author_email="__",
     license="GNU LGPL v3+",
@@ -35,7 +35,7 @@ setup(
     provides=['pygal_maps_se'],
     keywords=[
         "svg", "chart", "graph", "maps", "sweden"],
-    package_data={'pygal_maps_se': ['*.svg']},
+    package_data={'pygal_maps_se': ['*.svg','kommun_dict.json']},
     install_requires=["pygal>=1.9.9"],
 
     entry_points={
@@ -50,6 +50,5 @@ setup(
         "License :: OSI Approved :: "
         "GNU Lesser General Public License v3 or later (LGPLv3+)",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",
         "Topic :: Multimedia :: Graphics :: Presentation"])

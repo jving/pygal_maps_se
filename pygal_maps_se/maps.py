@@ -17,53 +17,66 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with pygal. If not, see <http://www.gnu.org/licenses/>.
 """
-Swiss cantons map
+Swedish map, län, vägregioner & kommuner
 
 """
 
 from __future__ import division
+from importlib.resources import files
 from pygal.graph.map import BaseMap
-from pygal._compat import u
+#from pygal._compat import u
 import os
+import json
 
 
 LAN = {
-    'AB': u("Stockholm"),
-    'C': u("Uppsala"),
-    'D': u("Södermanland"),
-    'E': u("Östergötland"),
-    'F': u("Jönköping"),
-    'G': u("Kronoberg"),
-    'H': u("Kalmar"),
-    'I': u("Gotland"),
-    'K': u("Blekinge"),
-    'M': u("Skåne"),
-    'N': u("Halland"),
-    'O': u("Västra götaland"),
-    'S': u("Värmland"),
-    'T': u("Örebro"),
-    'U': u("Västmanland"),
-    'X': u("Gävleborg"),
-    'Y': u("Västernorrland"),
-    'AC': u("Västerbotten"),
-    'Z': u("Jämtland"),
-    'BD': u("Nottbotten"),
-    'W': u("Dalarna"),
+    'AB': "Stockholm",
+    'C': "Uppsala",
+    'D': "Södermanland",
+    'E': "Östergötland",
+    'F': "Jönköping",
+    'G': "Kronoberg",
+    'H': "Kalmar",
+    'I': "Gotland",
+    'K': "Blekinge",
+    'M': "Skåne",
+    'N': "Halland",
+    'O': "Västra götaland",
+    'S': "Värmland",
+    'T': "Örebro",
+    'U': "Västmanland",
+    'X': "Gävleborg",
+    'Y': "Västernorrland",
+    'AC': "Västerbotten",
+    'Z': "Jämtland",
+    'BD': "Nottbotten",
+    'W': "Dalarna",
 }
 
 REGIONER = {
-    "Stockholm": u("Stockholm"),
-    "Sydost": u("Sydost"),
-    "Skane": u("Skane"),
-    "Vast": u("Vast"),
-    "Mitt": u("Mitt"),
-    "Norr": u("Norr"),
+    "Stockholm": "Stockholm",
+    "Sydost": "Sydost",
+    "Skane": "Skane",
+    "Vast": "Vast",
+    "Mitt": "Mitt",
+    "Norr": "Norr",
 }
+
+kommun_dict_path = files("pygal_maps_se").joinpath('kommun_dict.json')
+with open(kommun_dict_path,'r') as file:
+
+    KOMMUNER = json.load(file)
+
 
 with open(os.path.join(
         os.path.dirname(__file__),
         'se.lan.svg')) as file:
     LAN_MAP = file.read()
+
+with open(os.path.join(
+        os.path.dirname(__file__),
+        'se.kommuner.svg')) as file:
+    KOMMUN_MAP = file.read()
 
 
 class Lan(BaseMap):
@@ -81,4 +94,17 @@ class VagRegion(BaseMap):
     area_prefix = 'v'
     kind = 'region'
     svg_map = LAN_MAP
+
+
+class Kommun(BaseMap):
+    """ Swedish Kommun map """
+    x_labels = list(KOMMUNER.keys())
+    area_names = KOMMUNER
+    area_prefix = 'k'
+    kind = 'kommun'
+    svg_map = KOMMUN_MAP
+
+    def adapt_code(self, area_code):
+        """Hook to change the area code"""
+        return KOMMUNER.get(area_code, area_code)
 
